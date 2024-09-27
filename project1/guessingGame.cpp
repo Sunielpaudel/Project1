@@ -1,19 +1,37 @@
 #include <iostream>
 #include <cstdlib>  
-#include <ctime>    
+#include <ctime>
+#include<limits>
 using namespace std;
 
 // Function to generate a random number between the specified range
 int generateRandomNumber(int lower, int upper) {
-    return rand() % (upper - lower + 1) + lower;  // Random number between lower and upper
+    return rand() % (upper - lower + 1) + lower;  
+}
+
+// Function to get and validate integer input from the user
+int getValidatedInput(const string& prompt) {
+    int input;
+    cout << prompt;
+
+    while (!(cin >> input)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input! Please enter a valid number: ";
+    }
+    return input;
 }
 
 // Function to get the user's guess
 int getUserGuess() {
     int guess;
-    cout << "Enter your guess: ";
-    cin >> guess;
-    return guess;
+        cout << "Enter your guess: ";
+        while(!(cin >> guess)){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input! please enter a valid guess: ";
+    }
+        return guess;
 }
 
 // Function to check the user's guess against the generated random number
@@ -55,11 +73,10 @@ int main() {
     cout << "Welcome to the Random Number Guessing Game!" << endl;
     cout << "Choose a range for the random number." << endl;
 
-    cout << "Enter the minimum number of the range: ";
-    cin >> lowerBound;
+    lowerBound = getValidatedInput("Enter the minimum number of the range: ");
 
-    cout << "Enter the maximum number of the range: ";
-    cin >> upperBound;
+    upperBound = getValidatedInput("Enter the maximum number of the range: ");
+  
 
     // Validation of the range:
     while (lowerBound >= upperBound) {
