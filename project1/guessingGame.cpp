@@ -4,6 +4,8 @@
 #include<limits>
 using namespace std;
 
+const int maxAttempts = 100;
+
 // Function to generate a random number between the specified range
 int generateRandomNumber(int lower, int upper) {
     return rand() % (upper - lower + 1) + lower;  
@@ -49,20 +51,27 @@ void checkGuess(int guess, int target) {
 
 // Function to start the game
 void playGuessingGame(int lowerBound, int upperBound) {
-    // Generate random number
     int randomNumber = generateRandomNumber(lowerBound, upperBound);
 
     int guess = -1;
     int attempts = 0;
+    int guesses[maxAttempts];
 
     // Loop until the user guesses the correct number
-    while (guess != randomNumber) {
+    while (guess != randomNumber && attempts < maxAttempts) {
         guess = getUserGuess();
+        guesses[attempts] = guess;
         checkGuess(guess, randomNumber);
         attempts++;
     }
 
     cout << "You guessed the number in " << attempts << " attempts!" << endl;
+
+    cout << "Your guesses were: ";
+    for (int i = 0; i < attempts; i++) {
+        cout << guesses[i] << " ";
+    }
+    cout << endl;
 }
 
 int main() {
