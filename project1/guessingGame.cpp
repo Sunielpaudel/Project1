@@ -4,7 +4,10 @@
 #include<limits>
 using namespace std;
 
-const int maxAttempts = 100;
+int selectDifficulty();
+const int easyMaxAttempts = 10;
+const int mediumMaxAttempts = 6;
+const int hardMaxAttempts = 4;
 
 // Function to generate a random number between the specified range
 int generateRandomNumber(int lower, int upper) {
@@ -49,15 +52,13 @@ void checkGuess(int guess, int target) {
     }
 }
 
-// Function to start the game
-void playGuessingGame(int lowerBound, int upperBound) {
+void playGuessingGame(int lowerBound, int upperBound, int maxAttempts) {
     int randomNumber = generateRandomNumber(lowerBound, upperBound);
 
     int guess = -1;
     int attempts = 0;
-    int guesses[maxAttempts];
+    int guesses[100];
 
-    // Loop until the user guesses the correct number
     while (guess != randomNumber && attempts < maxAttempts) {
         guess = getUserGuess();
         guesses[attempts] = guess;
@@ -65,7 +66,12 @@ void playGuessingGame(int lowerBound, int upperBound) {
         attempts++;
     }
 
-    cout << "You guessed the number in " << attempts << " attempts!" << endl;
+    if (guess == randomNumber) {
+        cout << "You guessed the number in " << attempts << " attempts!" << endl;
+    }
+    else {
+        cout << " Sorry, you've used all your attempts. The correct number was " << randomNumber << "." << endl;
+    }
 
     cout << "Your guesses were: ";
     for (int i = 0; i < attempts; i++) {
@@ -77,28 +83,57 @@ void playGuessingGame(int lowerBound, int upperBound) {
 int main() {
     srand(time(0));  
 
-    int lowerBound, upperBound;
+    int lowerBound, upperBound, maxAttempts;
 
     cout << "Welcome to the Random Number Guessing Game!" << endl;
-    cout << "Choose a range for the random number." << endl;
+    int difficulty = selectDifficulty();
 
-    lowerBound = getValidatedInput("Enter the minimum number of the range: ");
+    
+    if (difficulty == 1) { 
+        lowerBound = getValidatedInput("Enter the minimum number of the range: ");
+        upperBound = getValidatedInput("Enter the maximum number of the range: ");
 
-    upperBound = getValidatedInput("Enter the maximum number of the range: ");
-  
+        
+        while (lowerBound >= upperBound) {
+            cout << "Invalid range! The maximum number must be greater than the minimum number." << endl;
+            lowerBound = getValidatedInput("Enter the minimum number of the range: ");
+            upperBound = getValidatedInput("Enter the maximum number of the range: ");
+        }
 
-    // Validation of the range:
-    while (lowerBound >= upperBound) {
-        cout << "Invalid range! The maximum number must be greater than the minimum number." << endl;
-        cout << "Enter the minimum number: ";
-        cin >> lowerBound;
-        cout << "Enter the maximum number: ";
-        cin >> upperBound;
+        maxAttempts = easyMaxAttempts;
+    }
+    else if (difficulty == 2) { 
+        lowerBound = 1;
+        upperBound = 50;
+        maxAttempts = mediumMaxAttempts;
+    }
+    else {  
+        lowerBound = 1;
+        upperBound = 20;
+        maxAttempts = hardMaxAttempts;
     }
 
     cout << "I have picked a number between " << lowerBound << " and " << upperBound << ". Can you guess what it is?" << endl;
+    cout << "You have " << maxAttempts << " attempts to guess the number." << endl;
 
-    playGuessingGame(lowerBound, upperBound);
+    playGuessingGame(lowerBound, upperBound, maxAttempts);
 
     return 0;
+}
+
+int selectDifficulty() {
+    cout << "Select Difficulty Level:" << endl;
+    cout << "1. Easy (User-defined range, 10 attempts)" << endl;
+    cout << "2. Medium (1-50, 6 attempts)" << endl;
+    cout << "3. Hard (1-20, 4 attempts)" << endl;
+
+    int choice;
+    choice = getValidatedInput("Enter your choice (1-3): ");
+
+    while (choice < 1 || choice > 3) {
+        cout << "Invalid choice! Please select a valid difficulty level (1-3)." << endl;
+        choice = getValidatedInput("Enter your choice (1-3): ");
+    }
+
+    return choice;
 }
