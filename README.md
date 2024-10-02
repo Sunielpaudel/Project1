@@ -27,6 +27,11 @@ This project is a simple Random Number Guessing Game built in C++. The game gene
 3. Receive feedback after each guess (Too high, Too low, or Correct).
 4. The game will show a summary of your guesses after completion.
 
+## Screenshots
+ <img width="960" alt="Random Number Guessing Game" src="https://github.com/user-attachments/assets/2ac255c0-d564-4993-bdeb-30abbbb6600c">
+ <img width="960" alt="Random Number Guessing Game1" src="https://github.com/user-attachments/assets/e289415b-02f6-4086-a3ea-7056e7394897">
+
+
 ## Author
 
 - *Kailash Paudel*
