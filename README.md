@@ -34,4 +34,6 @@ This project is a simple Random Number Guessing Game built in C++. The game gene
 
 ## Author
 
-- *Kailash Paudel*
+# Name: **Kailash Paudel**
+# Email: *10897677@cc.peralta.edu*
+# Date: *10/02/2024*
