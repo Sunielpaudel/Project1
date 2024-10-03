@@ -31,6 +31,8 @@ This project is a simple Random Number Guessing Game built in C++. The game gene
  <img width="960" alt="Random Number Guessing Game" src="https://github.com/user-attachments/assets/2ac255c0-d564-4993-bdeb-30abbbb6600c">
  <img width="960" alt="Random Number Guessing Game1" src="https://github.com/user-attachments/assets/e289415b-02f6-4086-a3ea-7056e7394897">
 
+# Videos
+https://github.com/user-attachments/assets/42f90245-16c8-49d4-996f-4a6789bfa6c5
 
 ## Author
 
